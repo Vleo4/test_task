@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: db_menu
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: db_company_lunch
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin1337
+
+  web:
+    build: .
+    container_name: menu
+    command: >
+      sh -c "python manage.py wait_for_db &&
+                   python manage.py migrate &&
+                   gunicorn company_lunch.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - .:/company_lunch
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_NAME: db_company_lunch
+      DB_USER: admin
+      DB_PASSWORD: admin1337
+      DB_HOST: db
+
+volumes:
+  postgres_data:
