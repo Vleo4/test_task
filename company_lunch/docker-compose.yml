@@ -17,7 +17,7 @@ services:
     command: >
       sh -c "python manage.py wait_for_db &&
                    python manage.py migrate &&
-                   gunicorn company_lunch.wsgi:application --bind 0.0.0.0:8000"
+                   gunicorn --timeout 120 --workers 3 company_lunch.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - .:/company_lunch
     ports:

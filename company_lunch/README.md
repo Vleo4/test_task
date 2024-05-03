@@ -26,3 +26,10 @@ DJANGO_ENVIRONMENT=development
 DJANGO_ENVIRONMENT=testing
 ```
 #### in .env file
+
+## API guide
+
+### Some endpoints require "Authorization" header
+```
+Bearer your_token
+```
