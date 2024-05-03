@@ -13,6 +13,7 @@ docker-compose up --build
 #### Run tests
 
 ```
+pip install -r requirements.txt
 pytest
 ```
 
@@ -22,6 +23,6 @@ DJANGO_ENVIRONMENT=development
 ```
 #### to 
 ```
-DJANGO_ENVIRONMENT=development
+DJANGO_ENVIRONMENT=testing
 ```
 #### in .env file
